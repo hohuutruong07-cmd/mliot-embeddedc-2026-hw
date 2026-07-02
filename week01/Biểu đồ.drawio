@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="NjO-llN4sBianLbBuEzH">
+    <mxGraphModel dx="1022" dy="564" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="X-p6-6AphbItj9BDhwSL-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Khởi động" vertex="1">
+          <mxGeometry height="60" width="120" x="365" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-3" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="420" y="160" as="sourcePoint" />
+            <mxPoint x="420" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="STATE-SAFE" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-5" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="310" />
+            </Array>
+            <mxPoint x="420" y="300" as="sourcePoint" />
+            <mxPoint x="420" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Nhiệt độ lớn hơn hoặc bằng Thresold" vertex="1">
+          <mxGeometry height="60" width="120" x="425" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="SATE-WARNING" vertex="1">
+          <mxGeometry height="60" width="120" x="360" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-8" edge="1" parent="1" source="t3c_1r4ibcx4rCwr1c9y-7" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="410" y="530" as="sourcePoint" />
+            <mxPoint x="420" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Thời gian lớn hơn hoặc bằng 5 giây" vertex="1">
+          <mxGeometry height="60" width="120" x="425" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="STATE-EMERGENCY" vertex="1">
+          <mxGeometry height="60" width="140" x="350" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-15" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="490" y="590" as="sourcePoint" />
+            <mxPoint x="680" y="590" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-16" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="t3c_1r4ibcx4rCwr1c9y-7" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="430" />
+            </Array>
+            <mxPoint x="680" y="590" as="sourcePoint" />
+            <mxPoint x="450" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-17" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Thời gian bé hơn 5 giây" vertex="1">
+          <mxGeometry height="60" width="120" x="690" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-18" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="160" y="580" as="sourcePoint" />
+            <mxPoint x="350" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-20" edge="1" parent="1" style="endArrow=none;html=1;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="160" y="580" as="sourcePoint" />
+            <mxPoint x="160" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-21" edge="1" parent="1" style="endArrow=classic;html=1;rounded=0;entryX=0.023;entryY=0.38;entryDx=0;entryDy=0;entryPerimeter=0;" target="t3c_1r4ibcx4rCwr1c9y-4" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="160" y="260" as="sourcePoint" />
+            <mxPoint x="210" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t3c_1r4ibcx4rCwr1c9y-22" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Nhiệt độ bé hơn Thresold" vertex="1">
+          <mxGeometry height="60" width="120" x="30" y="380" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
