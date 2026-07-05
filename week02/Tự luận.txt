@@ -1,0 +1,51 @@
+Task 4: Khảo sát Bản đồ bộ nhớ và Debug Crash Lab
+
+4.2 Sắp xếp các biến vào phân vùng bộ nhớ vật lý tương ứng:
+  -BIKE_MODEL: Thuộc phân vùng `.rodata` (Read-Only Data) vì đây là một
+  biến toàn cục được khai báo đi kèm từ khóa hằng số `const`. Giá trị của
+  nó là bất biến và được lưu trữ cố định trên bộ nhớ non-volatile (Flash).
+  -Total_odometer: Thuộc phân vùng `.bss` (Block Started by Symbol). Mặc dù là
+  biến toàn cục nhưng nó được khởi tạo bằng giá trị `0`. Trình biên dịch sẽ 
+  tối ưu bằng cách không lưu giá trị này ở Flash mà xếp vào `.bss` để xóa 
+  về 0 hàng loạt tại giai đoạn khởi động (Startup code).
+  -Current_speed: Thuộc phân vùng `Stack` (Ngăn xếp) vì đây là một biến cục bộ 
+  (local variable) được định nghĩa bên trong phạm vi hàm main(). Nó được cấp 
+  phát khi luồng thực thi đi vào hàm và tự động giải phóng khi thoát hàm.
+
+4.3 Hiện tượng xảy ra khi kích hoạt hàm crash_simulation():
+  -Trên máy tính (Giả lập GCC): Chương trình sẽ bị sụp đổ ngay lập tức và
+  Hệ điều hành sẽ thông báo lỗi "Segmentation fault (core dumped)". Nguyên nhân
+  là do hàm đệ quy liên tục đẩy các khung hàm (stack frame) mới vào Stack mà
+  không giải phóng, làm vùng nhớ Stack vượt quá giới hạn cấp phát của OS cho
+  tiến trình, gây vi phạm bảo vệ bộ nhớ.
+  -Trên vi điều khiển thực tế (Ví dụ: ARM Cortex-M): Khi xảy ra tràn Stack,
+  con trỏ Stack Pointer (SP) sẽ di chuyển vượt biên phân vùng RAM dành cho Stack, 
+  ghi đè sang các vùng nhớ khác. Phần cứng CPU phát hiện hành vi truy cập bộ nhớ 
+  bất hợp pháp hoặc sai lệch này và lập tức kích hoạt cơ chế ngắt ngoại lệ khẩn 
+  cấp hệ thống. CPU sẽ nhảy vào hàm ngắt ngoại lệ: `HardFault_Handler` (hoặc 
+  `MemManage_Handler` nếu có cấu hình đơn vị bảo vệ bộ nhớ MPU).
+
+Task 5: Tối ưu hóa dung lượng với Linker Script
+
+  -Câu trả lời: CÁCH 1 (`uint16_t trip_history[20000] = {0};`) sẽ giúp chương 
+  trình biên dịch thành công và nạp được xuống chip mà không làm quá tải 
+  dung lượng bộ nhớ Flash.
+
+  -Giải thích ngắn gọn dựa trên bản chất của phân vùng `.data` và `.bss`:
+  + Ở Cách 2 (`= {1, 2, 3}`): Mảng được khởi tạo với các giá trị khác không.
+    Trình biên dịch bắt buộc phải xếp toàn bộ mảng này vào phân vùng `.data`. 
+    Bản chất của phân vùng `.data` là hệ thống phải duy trì, lưu trữ thô toàn bộ
+    giá trị khởi tạo ban đầu này bên trong bộ nhớ FLASH (tốn gần ~40 KB Flash) 
+    để khi khởi động xe, mã nguồn startup mới copy từ Flash sang RAM. Do bộ nhớ 
+    Flash của chip chỉ còn trống 20 KB, quá trình liên kết (Linker) sẽ thất bại 
+    ngay lập tức do tràn bộ nhớ (Flash Overflow).
+
+  + Ở Cách 1 (`= {0}`): Mảng được khởi tạo hoàn toàn bằng 0. Trình biên dịch 
+    sẽ xếp mảng này vào phân vùng `.bss`. Đặc điểm cốt lõi của phân vùng `.bss` 
+    là KHÔNG CHIẾM BẤT KỲ DUNG LƯỢNG THỰC TẾ NÀO trên bộ nhớ Flash. Linker chỉ lưu 
+    lại 2 thông tin: địa chỉ bắt đầu và tổng kích thước mảng. Khi bật nguồn xe, 
+    đoạn mã startup (`startup_sam3x.s` / `startup_stm32.s`...) sẽ chạy một vòng 
+    lặp để xóa trắng (clear) toàn bộ vùng RAM tương ứng về 0 trước khi nhảy vào 
+    hàm `main`. Do bộ nhớ RAM của vi điều khiển còn trống tới 128 KB, hệ thống 
+    hoàn toàn thừa sức chứa mảng 40 KB này mà không gây ra bất cứ áp lực nào 
+    lên vùng bộ nhớ Flash giới hạn.
